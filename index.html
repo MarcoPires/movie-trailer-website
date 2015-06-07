@@ -1,0 +1,1139 @@
+
+<head>
+    <meta charset="utf-8">
+    <title>Movie Trailer Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link href="css/flat-ui.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 640px;
+            height: 480px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -14px;
+            right: -10px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.movie-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+            $('.movie-tile').show();
+          });
+        });
+
+        // show/hide movie-title more details
+        $(document).on('mouseenter', '.movie-tile', function (event) {
+          $(this).find(".popover").addClass("show");
+        });
+        $(document).on('mouseleave ', '.movie-tile', function (event) {
+          $(this).find(".popover").removeClass("show");
+        });
+    </script>
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+            <span class="fui-cross-circle"></span>
+          </a>
+          <div class="scale-media" id="trailer-video-container">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Static navbar -->
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+
+          <a class="navbar-brand" href="#">Trailer Website <span class="fui-youtube"></span> </a>
+
+        </div>
+        <ul class="nav navbar-nav navbar-left">
+          <li class="active"><a href="#moviesTab" aria-controls="moviesTab" role="tab" data-toggle="tab">Movies</a></li>
+
+          <li><a href="#seriesTab" aria-controls="moviesTab" role="tab" data-toggle="tab">Tv Shows</a></li>
+        </ul>
+
+        </div>
+        </div>
+
+    <!-- Main -->
+    <div class="container thumbs-wrapper">
+        <div class="row tab-content">
+
+          <div role="tabpanel" class="tab-pane active" id="moviesTab">
+            
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="8hP9D6kZseM" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">8.8</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>Inception</h5>
+      <p>A thief who steals corporate secrets through use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover left" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2010
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-user"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Director
+            </h4>
+            Christopher Nolan
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Leonardo DiCaprio<br/> Joseph Gordon-Levitt<br/> Ellen Page<br/> Tom Hardy
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Action, Mystery, Sci-Fi
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            148 min
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            PG-13
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="zSWdZVtXT7E" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">8.7</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>Interstellar</h5>
+      <p>A team of explorers travel through a wormhole in an attempt to ensure humanity's survival.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover left" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2014
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-user"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Director
+            </h4>
+            Christopher Nolan
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Ellen Burstyn<br/> Matthew McConaughey<br/> Mackenzie Foy<br/> John Lithgow
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Adventure, Sci-Fi
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            169 min
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            PG-13
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="GokKUqLcvD8" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">8.5</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>The Dark Knight Rises</h5>
+      <p>Eight years after the Joker's reign of anarchy, the Dark Knight is forced to return from his imposed exile to save Gotham City from the brutal guerrilla terrorist Bane with the help of the enigmatic Catwoman.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover right" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2012
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-user"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Director
+            </h4>
+            Christopher Nolan
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Christian Bale<br/> Gary Oldman<br/> Tom Hardy<br/> Joseph Gordon-Levitt
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Action, Thriller
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            165 min
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            PG-13
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+<div class="clearfix visible-xs-block"></div>
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="EXeTwQWrcwY" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">9.0</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>The Dark Knight</h5>
+      <p>When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover left" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2008
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-user"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Director
+            </h4>
+            Christopher Nolan
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Christian Bale<br/> Heath Ledger<br/> Aaron Eckhart<br/> Michael Caine
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Action, Crime, Drama
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            152 min
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            PG-13
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="o4gHCmTQDVI" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMjA4NDI0MTIxNF5BMl5BanBnXkFtZTYwNTM0MzY2._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">8.5</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>The Prestige</h5>
+      <p>Two stage magicians engage in competitive one-upmanship in an attempt to create the ultimate stage illusion.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover left" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2006
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-user"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Director
+            </h4>
+            Christopher Nolan
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Hugh Jackman<br/> Christian Bale<br/> Michael Caine<br/> Piper Perabo
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Drama, Mystery, Thriller
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            130 min
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            PG-13
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="neY2xVmOfUM" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">8.3</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>Batman Begins</h5>
+      <p>After training with his mentor, Batman begins his war on crime to free the crime-ridden Gotham City from corruption that the Scarecrow and the League of Shadows have cast upon it.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover right" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2005
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-user"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Director
+            </h4>
+            Christopher Nolan
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Christian Bale<br/> Michael Caine<br/> Liam Neeson<br/> Katie Holmes
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Action, Adventure
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            140 min
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            PG-13
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+<div class="clearfix visible-xs-block"></div>
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="0vS0E9bBSL0" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMTc4MjUxNDAwN15BMl5BanBnXkFtZTcwMDMwNDg3OA@@._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">8.5</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>Memento</h5>
+      <p>A man creates a strange system to help him remember things; so he can hunt for the murderer of his wife without his short-term memory loss being an obstacle.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover left" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2000
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-user"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Director
+            </h4>
+            Christopher Nolan
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Guy Pearce<br/> Carrie-Anne Moss<br/> Joe Pantoliano<br/> Mark Boone Junior
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Mystery, Thriller
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            113 min
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            R
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+          </div>
+          <div role="tabpanel" class="tab-pane" id="seriesTab">
+            
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="Yj0l7iGKh8g" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMTQ5MzY5ODE5M15BMl5BanBnXkFtZTgwNzU4OTM1MjE@._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">8.3</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>The Flash</h5>
+      <p>Barry Allen wakes up 9 months after he was struck by lightning and discovers that the bolt gave him the power of super speed. With his new team and powers, Barry becomes "The Flash" and fights crime in Central City.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover left" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2014–
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Grant Gustin<br/> Candice Patton<br/> Danielle Panabaker<br/> Rick Cosnett
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Action, Adventure, Drama
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            43 min per episode
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            TV-PG
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-folder"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Seasons
+            </h4>
+            2
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="ViFb0paKdgg" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMTg3OTc0NzkyOV5BMl5BanBnXkFtZTgwMDMwMTM3MjE@._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">8.2</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>Arrow</h5>
+      <p>Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover left" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2012–
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Stephen Amell<br/> Katie Cassidy<br/> David Ramsey<br/> Willa Holland
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Action, Adventure, Crime
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            42 min per episode
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            TV-14
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-folder"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Seasons
+            </h4>
+            4
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="KQzRs6UCbuI" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMTgyMjU0Mzg5Nl5BMl5BanBnXkFtZTgwMTg3MDYyNTE@._V1_SX640_SY720_.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">9.1</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>Daredevil</h5>
+      <p>A blind lawyer, with his other senses superhumanly enhanced, fights crime as a costumed superhero.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover right" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2015–
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Charlie Cox<br/> Deborah Ann Woll<br/> Elden Henson<br/> Vincent D'Onofrio
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Action, Crime, Drama
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            60 min per episode
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            TV-MA
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-folder"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Seasons
+            </h4>
+            1
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+<div class="clearfix visible-xs-block"></div>
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="TXwCoNwBSkQ" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMTUzNTMwODI1OV5BMl5BanBnXkFtZTgwMDIzMTQ0NTE@._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">9.3</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>True Detective</h5>
+      <p>An anthology series in which police investigations unearth the personal and professional secrets of those involved, both within and outside the law.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover left" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2014–
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Matthew McConaughey<br/> Woody Harrelson<br/> Michelle Monaghan<br/> Michael Potts
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Crime, Drama, Mystery
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            55 min per episode
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            TV-MA
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-folder"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Seasons
+            </h4>
+            2
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-md-4 col-sm-4 movie-tile" data-trailer-youtube-id="F9Bo89m2f6g" data-toggle="modal" data-target="#trailer" >
+  <!-- cover and main info -->
+  <div class="thumbnail">
+    <div class="poster">
+      <img src="http://ia.media-imdb.com/images/M/MV5BNTgxOTI4NzY2M15BMl5BanBnXkFtZTgwMjY3MTM2NDE@._V1_SX300.jpg" alt="...">
+      <span class="movie_ranking"><span class="text">Imdb ranking</span><span class="label label-default">9.5</span></span>
+    </div>
+    
+    
+    <div class="caption">
+      <h5>Game of Thrones</h5>
+      <p>Several noble families fight for control of the mythical land of Westeros.</p>
+    </div>
+  </div>
+
+  <!-- more details -->
+  <div class="popover left" role="tooltip">
+    <div class="arrows"></div>
+    <h3 class="popover-title">More details</h3>
+    <div class="popover-content">
+      
+      <ul>
+
+        <li>
+          <div class="todo-icon fui-calendar-solid"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Year
+            </h4>
+            2011–
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-star-2"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Stars
+            </h4>
+            Peter Dinklage<br/> Lena Headey<br/> Emilia Clarke<br/> Kit Harington
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-clip"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Genre
+            </h4>
+            Adventure, Drama, Fantasy
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-time"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Duration
+            </h4>
+            55 min per episode
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-tag"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Rated
+            </h4>
+            N/A
+          </div>
+        </li>
+        <li>
+          <div class="todo-icon fui-folder"></div>
+          <div class="todo-content">
+            <h4 class="todo-name">
+              Seasons
+            </h4>
+            6
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+          </div>
+        
+        </div>
+    </div>
+
+  </body>
+</html>
